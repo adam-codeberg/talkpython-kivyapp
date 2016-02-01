@@ -1,0 +1,500 @@
+<TabPanelTransactions>:
+    tab_pos: "bottom_mid" 
+    canvas:
+        Color:
+            rgba: (0.282,0.357,0.447,1.0) # green
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            
+<TabbedPanelItem>:
+    #background_color: 0.508, 0.88, 0.669, 1.0
+    background_color: 0.65, 0.65, 0.65, 1.0
+
+<WeeklyTab>:
+
+<ErrorPopup>:
+    id: 'error_popup'
+    name: 'error_popup'
+    size_hint: 0.6, 0.6
+    StackLayout:
+        Label:
+            halign: 'left'
+            valign: 'middle'
+            anchor_x: 'middle'
+            title: 'Error'
+            text: 'Unauthorised'
+            size_hint: 1, 0.8
+        Button:
+            size_hint: 1, 0.2
+            text: 'Back'
+            font_size: 24
+            on_press: root.dismiss()
+                
+            
+<LoginScreen>:
+    id: 'screen_login'
+    name: 'screen_login'
+    StackLayout:
+        
+        StackLayout:
+            size_hint: 1, 0.10
+            anchor_x: 'center'
+            anchor_y: 'top'                    
+            canvas:
+                Color: 
+                    rgba: 0.1,0.1,0.1,1.0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.10, 1
+                Image:
+                    source: './assets/images/codeberglogo.png'
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.30, 1
+                Label:
+                    halign: 'left'
+                    valign: 'middle'
+                    anchor_x: 'left'
+                    text_size: self.size
+                    text: 'Codeberg'
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.495, 1
+                Label:
+                    halign: 'left'
+                    valign: 'middle'
+                    anchor_x: 'left'
+                    text_size: self.size
+                    text: 'Insert App Name Here'         
+                    
+            AnchorLayout:
+                anchor_x: 'right'
+                size_hint: 0.10, 1
+             
+        StackLayout:
+            size_hint: 1, 0.80
+            anchor_x: 'center'
+            anchor_y: 'middle'
+            canvas:
+                Color: 
+                    #rgba: 0.941,0.941,0.941,1.0
+                    rgba: 0.15,0.15,0.15, 1.0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    
+            BoxLayout:
+                id: login_layout
+                name: login_layout
+                orientation: 'vertical'
+                size_hint: 1, 0.8
+                spacing: root.width * 0.05
+                padding: 25, 0, 25, 0
+        
+                Label:
+                    text: self.parent.parent.parent.parent.txt_header
+                    font_size: 32
+        
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: 'Login'
+                        font_size: 18
+                        halign: 'left'
+                        text_size: root.width-20, 20
+        
+                    TextInput:
+                        id: login
+                        text: self.parent.parent.parent.parent.parent.auth_uid
+                        multiline:False
+                        font_size: 28
+        
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: 'Password'
+                        halign: 'left'
+                        font_size: 18
+                        text_size: root.width-20, 20
+        
+                    TextInput:
+                        id: password
+                        multiline:False
+                        password:True
+                        font_size: 28
+        
+
+
+        StackLayout:
+            size_hint: 1, 0.10
+            anchor_x: 'center'
+            anchor_y: 'top'
+            canvas:
+                Color: 
+                    rgba: 0.282,0.357,0.447,1.0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: 'Login'
+                font_size: 24
+    
+                on_press: root.do_login(login.text, password.text)
+
+
+
+    
+<TransactionScreen>:
+    id: 'screen_transactions'
+    name: 'screen_transactions'
+    StackLayout:
+        StackLayout:
+            size_hint: 1, 0.10
+            anchor_x: 'center'
+            anchor_y: 'top'                    
+            canvas:
+                Color: 
+                    rgba: 0.1,0.1,0.1,1.0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.10, 1
+                Image:
+                    source: './assets/images/codeberglogo.png'
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.30, 1
+                Label:
+                    halign: 'left'
+                    valign: 'middle'
+                    anchor_x: 'left'
+                    text_size: self.size
+                    text: 'Codeberg'
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.495, 1
+                Label:
+                    halign: 'left'
+                    valign: 'middle'
+                    anchor_x: 'left'
+                    text_size: self.size
+                    text: 'Insert App Name Here'         
+                    
+            AnchorLayout:
+                anchor_x: 'right'
+                size_hint: 0.10, 1
+                Button:
+                    anchor_x: 'right'
+                    text: 'options'
+                    on_press:
+                        root.transition.direction = 'left'
+                        root.current = 'screen_options'
+                    
+        StackLayout:
+            size_hint: 1, 0.80
+            anchor_x: 'center'
+            anchor_y: 'top'
+            canvas:
+                Color: 
+                    #rgba: 0.941,0.941,0.941,1.0
+                    rgba: 0.1,0.1,0.1,1.0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    
+            TabPanelTransactions:
+                default_tab_text: 'Week'   
+                default_tab_content: tabweekly_content.__self__
+                    
+                TabWeekly:
+                    id: tabweekly_content  
+                    size_hint: 1, 1      
+                    Label:
+                        size_hint: 1, 0.15
+                        font_size: 24
+                        text: tabweekly_content.header1
+                    StackLayout:
+                        Label:
+                            size_hint: 0.5, 0.10
+                            font_size: 16
+                            text: tabweekly_content.header2
+                            
+                        Label:
+                            font_size: 16
+                            size_hint: 0.5, 0.10
+                            text: tabweekly_content.charge_count
+                        Label:
+                            size_hint: 0.5, 0.10
+                            font_size: 16
+                            text: tabweekly_content.header3
+                            
+                        Label:
+                            font_size: 16
+                            size_hint: 0.5, 0.10
+                            text: tabweekly_content.decline_count
+                        Label:
+                            size_hint: 0.5, 0.10
+                            font_size: 16
+                            text: tabweekly_content.header4
+                            
+                        Label:
+                            font_size: 16
+                            size_hint: 0.5, 0.10
+                            text: tabweekly_content.transaction_count
+
+                        StackLayout:
+                            size_hint: 1,1
+                            anchor_y: 'bottom'
+                            anchor_x: 'middle'
+                            Label:
+                                size_hint: 0.5, 0.5
+                                font_size: 24
+                                text: tabweekly_content.header5
+                                
+                            Label:
+                                font_size: 24
+                                size_hint: 0.5, 0.5
+                                text: tabanually_content.accrued_count
+
+
+
+                        
+                                                    
+                TabMonthly:
+                    id: tabmonthly_content 
+                    text: 'Month'
+                    StackLayout:
+                        Label:
+                            size_hint: 1, 0.15
+                            font_size: 24
+                            text: tabmonthly_content.header1
+                        StackLayout:
+                            Label:
+                                size_hint: 0.5, 0.10
+                                font_size: 16
+                                text: tabmonthly_content.header2
+                                
+                            Label:
+                                font_size: 16
+                                size_hint: 0.5, 0.10
+                                text: tabmonthly_content.charge_count
+                            Label:
+                                size_hint: 0.5, 0.10
+                                font_size: 16
+                                text: tabmonthly_content.header3
+                                
+                            Label:
+                                font_size: 16
+                                size_hint: 0.5, 0.10
+                                text: tabmonthly_content.decline_count
+                            Label:
+                                size_hint: 0.5, 0.10
+                                font_size: 16
+                                text: tabmonthly_content.header4
+                                
+                            Label:
+                                font_size: 16
+                                size_hint: 0.5, 0.10
+                                text: tabmonthly_content.transaction_count
+
+                            StackLayout:
+                                size_hint: 1,1
+                                anchor_y: 'bottom'
+                                anchor_x: 'middle'
+                                Label:
+                                    size_hint: 0.5, 0.5
+                                    font_size: 24
+                                    text: tabmonthly_content.header5
+                                    
+                                Label:
+                                    font_size: 24
+                                    size_hint: 0.5, 0.5
+                                    text: tabmonthly_content.accrued_count
+
+                            
+                TabAnnually:
+                    id: tabanually_content 
+                    text: 'Annum'
+                    StackLayout:
+                        Label:
+                            size_hint: 1, 0.15
+                            font_size: 24
+                            text: tabanually_content.header1
+                            
+                        StackLayout:
+                            Label:
+                                size_hint: 0.5, 0.10
+                                font_size: 16
+                                text: tabanually_content.header2
+                                
+                            Label:
+                                font_size: 16
+                                size_hint: 0.5, 0.10
+                                text: tabanually_content.charge_count
+                            Label:
+                                size_hint: 0.5, 0.10
+                                font_size: 16
+                                text: tabanually_content.header3
+                                
+                            Label:
+                                font_size: 16
+                                size_hint: 0.5, 0.10
+                                text: tabanually_content.decline_count
+                            Label:
+                                size_hint: 0.5, 0.10
+                                font_size: 16
+                                text: tabanually_content.header4
+                                
+                            Label:
+                                font_size: 16
+                                size_hint: 0.5, 0.10
+                                text: tabanually_content.transaction_count
+
+                            StackLayout:
+                                size_hint: 1,1
+                                anchor_y: 'bottom'
+                                anchor_x: 'middle'
+                                Label:
+                                    size_hint: 0.5, 0.5
+                                    font_size: 24
+                                    text: tabanually_content.header5
+                                    
+                                Label:
+                                    font_size: 24
+                                    size_hint: 0.5, 0.5
+                                    text: tabanually_content.accrued_count
+                                                            
+        StackLayout:
+            size_hint: 1, 0.10
+            anchor_x: 'center'
+            anchor_y: 'top'
+            canvas:
+                Color: 
+                    rgba: 0.282,0.357,0.447,1.0
+                Rectangle:
+
+                    pos: self.pos
+                    size: self.size
+                    
+            AnchorLayout:
+                anchor_y: 'bottom'
+                size_hint: 1, 1
+                Button:
+                    anchor_y: 'bottom'
+                    text: 'Update transactions'
+                    on_press:
+                        root.update_transactions()
+
+    
+    
+    
+    
+<OptionsScreen>:
+    id: 'screen_options''
+    name: 'screen_options'
+    OpeningScreen:
+    
+        ContentTop:
+            size_hint: 1, 0.10
+            anchor_x: 'center'
+            anchor_y: 'top'                    
+            canvas:
+                Color: 
+                    rgba: 0.1,0.1,0.1,1.0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.10, 1
+                Image:
+                    source: './assets/images/codeberglogo.png'
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.30, 1
+                Label:
+                    halign: 'left'
+                    valign: 'middle'
+                    anchor_x: 'left'
+                    text_size: self.size
+                    text: 'Codeberg'
+                    
+            AnchorLayout:
+                anchor_x: 'left'
+                size_hint: 0.495, 1
+                Label:
+                    halign: 'left'
+                    valign: 'middle'
+                    anchor_x: 'left'
+                    text_size: self.size
+                    text: 'Insert App Name Here'         
+                    
+            AnchorLayout:
+                anchor_x: 'right'
+                size_hint: 0.10, 1
+                Button:
+                    anchor_x: 'right'
+                    text: 'Back'
+                    on_press:
+                        root.transition.direction = 'right'
+                        root.current = 'screen_transactions'
+                    
+ 
+        ContentBody:
+            size_hint: 1, 0.80
+            anchor_x: 'center'
+            anchor_y: 'top'
+            canvas:
+                Color: 
+                    #rgba: 0.941,0.941,0.941,1.0
+                    rgba: 0.15,0.15,0.15, 1.0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            StackLayout:
+                size_hint: 1, 0.10
+                Label:
+                    text: 'Options'
+                    font_size: 32
+                Button:
+                    text: 'Logout'
+                    font_size: 24
+        
+                    on_press: root.do_logout()
+
+                                                            
+        ContentBottom:
+            size_hint: 1, 0.10
+            anchor_x: 'center'
+            anchor_y: 'top'
+            canvas:
+                Color: 
+                    rgba: 0.282,0.357,0.447,1.0
+                Rectangle:
+
+                    pos: self.pos
+                    size: self.size
+
+
+<test@screen>:
+    id: 'load_app'
+    name: 'load_app'
+    AnchorLayout:
+        anchor_y: 'center'
+        size_hint: 1, 1
+        Image:
+            source: './assets/images/codeberglogo.png'

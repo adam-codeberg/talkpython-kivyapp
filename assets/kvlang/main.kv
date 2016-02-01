@@ -1,0 +1,193 @@
+#: import Animation kivy.animation.Animation
+
+<HorozontalMenu@StackLayout>:
+    canvas:
+        Color: 
+            rgba: 0.88,0.88,0.88,1.0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        
+    Image:
+        size_hint: 0.2,1
+        source: './assets/images/talkpython-nowrds.png'
+
+
+
+<SplashScreenContent@StackLayout>:
+
+    size_hint: 1, 0.40
+    padding: 20,20,20, 20  
+    canvas:
+        Color: 
+            rgba: 0.133,0.133,0.133,1.0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Image:
+        source: './assets/images/talkpython.png'
+        
+        
+    Label:
+        valign: 'middle'
+        halign: 'center'
+        size_hint: 1,1
+        font_size: 32
+        text: 'A podcast on Python and related technologies'
+        color: 0.9,0.9,0.9,1.0
+        markup: True
+        
+
+    
+<ShowScreenContent@StackLayout>:
+
+
+<MyRoot>:
+    id: _screen_manager
+    data_store: root.data_store
+    SplashScreen:
+        id: splash_screen
+        canvas:
+            Color: 
+                rgba: 0.1,0.1,0.1,1.0
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+        
+            SplashScreenContent:
+                MyProgressBar:
+                    size_hint: 1, 0.1
+                    manager: _screen_manager
+
+        
+                
+    PodCastListScreen:
+        id: podcast_list_screen
+        name: 'show_screen'
+        
+        canvas:
+            Color: 
+                rgba: 0.15,0.15,0.15,1.0
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        AnchorLayout:
+            manager: _screen_manager
+            anchor_x: 'center'
+            anchor_y: 'top'
+            
+            
+            StackLayout:
+                manager: _screen_manager
+                size_hint: 1,1
+                HorozontalMenu:
+                    size_hint: 1, 0.10
+                    Label:
+                        size_hint: 0.6,1
+                        text: 'Episodes'
+                        color: 0.15,0.15,0.15,1.0
+                    Button:
+                        manager: _screen_manager
+                        size_hint: 0.2,1
+                        anchor_x: 'right'
+                        text: 'Settings'
+                        on_press:
+                            self.manager.transition.direction = 'left'
+                            self.manager.current = 'setting_screen'
+                            
+        StackLayout:
+            size_hint: 1, 0.90
+            manager: _screen_manager
+            xdata_store: root.data_store
+            ScrollView:
+                bar_margin: 2
+                bar_color: 0.8,0.8,0,1
+                bar_width: 3
+                manager: root
+                
+                EntryStackLayout:
+                    id: entry_stack_layout
+                    name: 'entry_stack_layout'
+                    xdata_store: root.data_store
+                    
+                    padding: 20,20,20,20
+                    
+                    
+                    #Label:
+                        #size_hint: 1, 0.2
+                        #text: str(self.parent.xdata_store)
+                
+                    
+
+                
+            
+            
+    Screen:
+        id: setting_screen
+        name: 'setting_screen'
+        canvas:
+            Color: 
+                rgba: 0.1,0.1,0.1,1.0
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+            StackLayout:
+                size_hint: 1,1  
+                HorozontalMenu:
+                    size_hint: 1, 0.10
+                    Label:
+                        size_hint: 0.6,1
+                        text: 'Settings'
+                        color: 0.15,0.15,0.15,1.0
+                    Button:
+                        manager: _screen_manager
+                        #data_store: root.data_store
+                        size_hint: 0.2,1
+                        anchor_x: 'right'
+                        text: 'Back'
+                        on_press:
+                            self.manager.transition.direction = 'right'
+                            self.manager.current = 'show_screen'
+                            #self.data_store.put('settings', download_num=auto_download_slider.value)
+    
+                            
+                StackLayout:
+                    size_hint: 1, 0.90
+                    padding: 20,20,20,20
+                    
+                    Label:
+                        size_hint: 0.5,0.2
+                        text: 'Auto Download Episodes'
+                    Switch:
+                        id: auto_download_eps_switch
+                        name: 'auto_download_eps_switch'
+                        size_hint: 0.5,0.2
+    
+                    Label:
+                        size_hint: 0.5,0.2
+                        text: 'How many?'
+                    Slider:
+                        id: auto_download_slider
+                        name: 'auto_download_slider'
+                        size_hint: 0.4,0.2
+                        range: 0, 10
+                        step: 1
+                        value: 0
+                    Label:
+                        slider_value: str('{0:.0f}'.format(auto_download_slider.value))
+                        size_hint: 0.1,0.2
+                        text: self.slider_value
+                
+                    
+
+ 
